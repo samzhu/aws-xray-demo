@@ -26,7 +26,7 @@ jobs:
       env:
         USERNAME: $GITHUB_ACTOR
         TOKEN: ${{ github.token }}
-      run: ./gradlew build publish
+      run: ./gradlew build
     - name: Login Docker
       run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
     - name: Build Docker Image
