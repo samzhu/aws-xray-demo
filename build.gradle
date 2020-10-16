@@ -1,0 +1,61 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "Hoxton.SR8")
+	set('testcontainersVersion', "1.14.3")
+	set('awssdkVersion', "2.15.8")
+	set('xrayVersion', "2.7.1")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	//
+	// implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-v2-instrumentor'
+	implementation 'com.amazonaws:aws-xray-recorder-sdk-spring'
+	implementation 'com.amazonaws:aws-xray-recorder-sdk-core'
+	// implementation 'com.amazonaws:aws-xray-recorder-sdk-slf4j'
+	// implementation 'com.amazonaws:aws-xray-recorder-sdk-sql'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.testcontainers:junit-jupiter'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		mavenBom "software.amazon.awssdk:bom:${awssdkVersion}"
+		mavenBom "com.amazonaws:aws-xray-recorder-sdk-bom:${xrayVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
