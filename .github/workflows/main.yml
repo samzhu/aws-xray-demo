@@ -28,7 +28,7 @@ jobs:
         TOKEN: ${{ github.token }}
       run: ./gradlew build
     - name: Login Docker
-      run: echo "${{ github.token }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+      run: echo "${{ CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
     - name: Build Docker Image
       run: ./gradlew bootBuildImage --imageName=ghcr.io/$GITHUB_REPOSITORY/aws-xary-demo:$GITHUB_RUN_NUMBER
     - name: Push Docker
