@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+// 使用 AOP 方式
 // @Aspect
 // @Component
 public class XRayInspector extends AbstractXRayInterceptor {

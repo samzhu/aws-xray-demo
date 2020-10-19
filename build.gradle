@@ -52,7 +52,7 @@ dependencyManagement {
 	imports {
 		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-		mavenBom "software.amazon.awssdk:bom:${awssdkVersion}"
+		// mavenBom "software.amazon.awssdk:bom:${awssdkVersion}"
 		mavenBom "com.amazonaws:aws-xray-recorder-sdk-bom:${xrayVersion}"
 	}
 }
